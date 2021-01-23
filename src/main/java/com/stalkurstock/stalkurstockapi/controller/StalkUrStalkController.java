@@ -5,7 +5,7 @@ import com.stalkurstock.stalkurstockapi.entity.StockSymbol;
 import com.stalkurstock.stalkurstockapi.repository.StockSymbolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class StalkUrStalkController {
         }
     }
 
-    @GetMapping("/symbol")
-    public Symbol getSymbol(@RequestParam("value") String value) {
+    @GetMapping("/symbols/{symbol}")
+    public Symbol getSymbol(@PathVariable String symbol) {
         try {
-            StockSymbol stockSymbol = stockSymbolRepository.findDistinctBySymbol(value);
+            StockSymbol stockSymbol = stockSymbolRepository.findDistinctBySymbol(symbol);
             return Symbol.builder()
                     .symbol(stockSymbol.getSymbol())
                     .description(stockSymbol.getDescription())
