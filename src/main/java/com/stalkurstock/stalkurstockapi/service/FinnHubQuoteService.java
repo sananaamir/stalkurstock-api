@@ -26,9 +26,13 @@ public class FinnHubQuoteService {
     public Quote fetchRealTimeStockQuote(String symbol) {
         String url = finnHubBaseUrl + finnHubQuoteUrl + symbol + finnHubApiKey;
 
-        ResponseEntity<Quote> responseEntity = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(createHttpHeaders()), Quote.class);
-
-        return responseEntity.getBody();
+        try {
+            ResponseEntity<Quote> responseEntity = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(createHttpHeaders()), Quote.class);
+            return responseEntity.getBody();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     private HttpHeaders createHttpHeaders() {

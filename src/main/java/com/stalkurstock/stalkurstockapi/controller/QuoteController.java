@@ -16,7 +16,7 @@ public class QuoteController {
     private FinnHubQuoteService finnHubQuoteService;
 
     @GetMapping
-    public Quote getQuoteBySymbole(@RequestParam("symbol") String symbol) {
+    public Quote getQuoteBySymbol(@RequestParam("symbol") String symbol) {
         return finnHubQuoteService.fetchRealTimeStockQuote(symbol);
     }
 }
